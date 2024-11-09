@@ -4,19 +4,20 @@ import { TooltipTarget } from './styles/ui-element-styles/tooltip.styles';
 import IconInfo from './icons/Iconinfo';
 import Dropdown from './ui/Dropdown';
 import { extractPricingString } from '../lib/helper';
+import { FeaturesListWrapper, FeatureTitle, PlanCard, PlanInfoVisitorsBlock, PlanInfoWrapper, PlanName, PlanPrice, PrimaryButton } from './styles/Elements.styles';
 
 // eslint-disable-next-line react/prop-types
 const PricingPlanCard = ({ planInfo }) => {
     const { plan, features } = planInfo ?? {}
     return (
-        <div className="card">
-            <div className="plan-info-wrapper">
+        <PlanCard>
+            <PlanInfoWrapper>
                 <div className="plan-info">
-                    <h4 className='plan-info-name'>{plan?.name}</h4>
-                    <h2 className='amount'>{plan?.price}</h2>
+                    <PlanName>{plan?.name}</PlanName>
+                    <PlanPrice>{plan?.price}</PlanPrice>
                 </div>
                 {plan?.name !== "Growth" ?
-                    <div className="plan-info-visitors">
+                    <PlanInfoVisitorsBlock>
                         <span>{extractPricingString(plan?.title)}</span>
                         <Tooltip
                             tooltipContent={plan?.text}
@@ -24,7 +25,7 @@ const PricingPlanCard = ({ planInfo }) => {
                             background="fff">
                             <TooltipTarget><IconInfo /></TooltipTarget>
                         </Tooltip>
-                    </div>
+                    </PlanInfoVisitorsBlock>
                     : (
                         <div style={{ display: 'flex', justifyContent: 'start', alignItems: 'center', gap: '8px' }}>
                             <Dropdown />
@@ -37,12 +38,9 @@ const PricingPlanCard = ({ planInfo }) => {
                         </div>
                     )
                 }
-            </div>
-            <div className='features'>
-                <p className="feature-title">
-                    Free includes:
-                </p>
-
+            </PlanInfoWrapper>
+            <FeaturesListWrapper>
+                <FeatureTitle>Free includes:</FeatureTitle>
                 {
                     features?.map((feature, index) => (
                         <Tooltip key={index} tooltipContent={feature?.feature_desc} position="top" background={"fff"}>
@@ -54,9 +52,9 @@ const PricingPlanCard = ({ planInfo }) => {
                         </Tooltip>
                     ))
                 }
-            </div>
-            <button className="primary-btn">Select Plan</button>
-        </div>
+            </FeaturesListWrapper>
+            <PrimaryButton color='' >Select Plan</PrimaryButton>
+        </PlanCard>
     )
 
 };

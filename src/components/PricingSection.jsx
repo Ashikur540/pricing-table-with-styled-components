@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import PricingPlanCard from './PricingPlanCard';
 import { options } from './ui/Dropdown';
 import { extractPricingString } from '../lib/helper';
+import { PricingGrid } from './styles/Elements.styles';
 
 const PricingSection = () => {
     const [planData, setPlanData] = useState([]);
@@ -47,13 +48,13 @@ const PricingSection = () => {
     return (
         <div className="container">
             {/* 4 column card grid */}
-            <div className="card-grid">
+            <PricingGrid>
                 {
                     planData.slice(0, 4).map((plan, index) => (
                         <PricingPlanCard key={index} planInfo={plan} />
                     ))
                 }
-            </div>
+            </PricingGrid>
         </div>
     );
 };
