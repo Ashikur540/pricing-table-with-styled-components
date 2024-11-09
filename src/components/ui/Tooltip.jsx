@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { TooltipBoxContainer, TooltipBox, TooltipTarget, TooltipWrapper } from "../styles/ui-element-styles/tooltip.styles";
 
 
-export function Tooltip({ position, tooltipContent, children, background, styleMe}) {
+export function Tooltip({ position, tooltipContent, children, background}) {
     const [isHovered, setIsHovered] = useState(false);
     const [isFocused, setIsFocused] = useState(false);
     const targetRef = useRef(null);
@@ -25,14 +25,13 @@ export function Tooltip({ position, tooltipContent, children, background, styleM
           onBlur={() => setIsFocused(false)}
           onClick={handleClick}
           ref={targetRef}
-          styleMe={styleMe}
           showOnFocus={isFocused}
         >
           {children}
         </TooltipTarget>
         {showTooltip && (
           <TooltipBoxContainer position={position}>
-            <TooltipBox background={background} position={position}>
+            <TooltipBox background={background} position={position}>  
               {tooltipContent}
             </TooltipBox>
           </TooltipBoxContainer>

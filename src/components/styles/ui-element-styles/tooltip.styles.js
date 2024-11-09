@@ -20,16 +20,23 @@ export const TooltipTarget = styled.div`
     `};
 `;
 
+
+const fadeIn = keyframes`
+  from {opacity: 0;}
+  to {opacity: 1;}
+`;
+
 export const TooltipBoxContainer = styled.div`
   position: absolute;
-  width: 200px;
-  margin-left: -100px;
+  max-width: 240px;
   display: flex;
   justify-content: center;
   align-items: center;
   left: 50%;
   bottom: calc(100% + 5px);
+  transform: translateX(-50%); /* Centers the tooltip */
   pointer-events: none;
+  z-index: 10;
 
   ${({ position }) => {
     switch (position) {
@@ -40,20 +47,14 @@ export const TooltipBoxContainer = styled.div`
         `;
       case "left":
         return css`
-          margin-right: 0;
-          width: 100%;
-          left: unset;
-          top: 50%;
+          left: auto;
           right: calc(100% + 5px);
-          width: max-content;
+          transform: none;
         `;
       case "right":
         return css`
-          margin-left: 0;
-          width: 100%;
-          top: 50%;
           left: calc(100% + 5px);
-          width: max-content;
+          transform: none;
         `;
       default:
         return css`
@@ -63,30 +64,22 @@ export const TooltipBoxContainer = styled.div`
   }}
 `;
 
-const fadeIn = keyframes`
-  from {opacity: 0;}
-  to {opacity: 1;}
-`;
-
 export const TooltipBox = styled.span`
-  position: relative;
-  background-color: #${(props) => props.background};  
-  text-align: center;
+  background-color: #${(props) => props.background ?? "fff"};  
   border-radius: 4px;
   padding: 5px 10px;
   line-height: 1.5 !important;
   font-size: 14px;
   min-width: 180px;
   max-width: 240px;
-  word-break: break-word;
-  color:#49687e !important;
-  font-family: inherit;
+  word-wrap: break-word;
+  overflow-wrap: break-word; /* Ensures long words break into the next line */
+  color: #49687e !important;
   border: 1px solid white;
-  box-shadow:0 0 16px 0 rgba(73, 104, 126, .2);
+  box-shadow: 0 0 16px 0 rgba(73, 104, 126, .2);
   z-index: 10 !important;
-  animation: ${fadeIn} .3s linear;
+  animation: ${fadeIn} 0.3s linear;
   
-   /* for the arrow set position according to tooltip position*/
   &:after {
     content: "";
     position: absolute;
@@ -94,11 +87,10 @@ export const TooltipBox = styled.span`
     height: 1px;
     border-width: 5px;
     border-style: solid;
-    border-color: #${(props) =>
-    props.background} transparent transparent transparent;
-    left: calc(5% - 4.5px);
+    border-color: #${(props) => props.background} transparent transparent transparent;
+    left: 50%;
     top: 100%;
-    z-index: 10;
+    transform: translateX(-50%); /* Center the arrow */
   }
 
   ${({ position }) => {
@@ -106,12 +98,9 @@ export const TooltipBox = styled.span`
       case "bottom":
         return css`
           &:after {
-            border-color: transparent transparent #${(props) =>
-            props.background} transparent;
+            border-color: transparent transparent #${(props) => props.background} transparent;
             top: unset;
-            width: 1px;
             bottom: 100%;
-            left: calc(50% - 5px);
           }
         `;
       case "left":
@@ -119,17 +108,18 @@ export const TooltipBox = styled.span`
           &:after {
             border-color: transparent transparent transparent #${(props) => props.background};
             left: 100%;
-            top: calc(50% - 5px);
+            top: 50%;
+            transform: translateY(-50%);
           }
         `;
       case "right":
         return css`
           &:after {
-            border-color: transparent #${(props) => props.background} transparent
-              transparent;
+            border-color: transparent #${(props) => props.background} transparent transparent;
             right: 100%;
             left: unset;
-            top: calc(50% - 5px);
+            top: 50%;
+            transform: translateY(-50%);
           }
         `;
       default:

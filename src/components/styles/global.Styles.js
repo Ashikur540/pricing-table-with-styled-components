@@ -1,6 +1,6 @@
 
 import { createGlobalStyle } from 'styled-components';
- 
+
 const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
@@ -14,7 +14,19 @@ const GlobalStyle = createGlobalStyle`
     );
     background-position: center;
     background-repeat: no-repeat;
+    
+  }
+
+  h1, h2, h3, h4, h5, h6,p {
+    font-family: 'Rubik', sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  button{
+    cursor: pointer;
+    outline: none;
+    font-family: inherit; 
   }
 `;
- 
+
 export default GlobalStyle;
