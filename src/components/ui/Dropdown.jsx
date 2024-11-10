@@ -1,39 +1,28 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from 'react-redux';
 
 import IconDownOpenMini from "../icons/IconDownOpenMini";
 import { Arrow, DropdownContainer, DropdownHeader, DropdownList, DropdownListContainer, ListItem } from "../styles/ui-element-styles/dropdown.styles";
+import { dropdownOptions, setVisitorsForGrowth } from "../../features/pricing/pricingSlice";
 
 
 
-export const options = [
-  { name: "Up to 150,000 visitors/month", value: 150000 },
-  { name: "Up to 300,000 visitors/month", value: 300000 },
-  { name: "Up to 500,000 visitors/month", value: 500000 },
-  { name: "Up to 1,000,000 visitors/month", value: 1000000 },
-  { name: "Up to 2,000,000 visitors/month", value: 2000000 },
-];
-
-
-// Main component
 const Dropdown = () => {
+  const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(
-    { name: "Up to 150,000 visitors/month", value: 150000 },
-  );
+  const selectedOption = useSelector(state => state.pricing.selectedGrowthVisitors);
 
   const toggleDropdown = () => setIsOpen(!isOpen);
 
   const handleOptionClick = (option) => {
-    setSelectedOption(option);
+    dispatch(setVisitorsForGrowth(option));
     setIsOpen(false);
   };
-
-
 
   return (
     <DropdownContainer>
       <DropdownHeader onClick={toggleDropdown}>
-        {selectedOption.name.slice(0, 20)}...
+        {selectedOption.slice(0, 20)}...
         <Arrow isOpen={isOpen}>
           <IconDownOpenMini />
         </Arrow>
@@ -41,9 +30,13 @@ const Dropdown = () => {
       {isOpen && (
         <DropdownListContainer>
           <DropdownList>
-            {options.map((option, index) => (
-              <ListItem key={index} onClick={() => handleOptionClick(option)} selected={selectedOption.value === option.value}>
-                {option.name}
+            {dropdownOptions.map((option, index) => (
+              <ListItem
+                key={index}
+                onClick={() => handleOptionClick(option)}
+                selected={selectedOption === option}
+              >
+                {option}
               </ListItem>
             ))}
           </DropdownList>

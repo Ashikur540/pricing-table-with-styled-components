@@ -3,21 +3,24 @@ import { Tooltip } from './ui/Tooltip';
 import { TooltipTarget } from './styles/ui-element-styles/tooltip.styles';
 import IconInfo from './icons/Iconinfo';
 import Dropdown from './ui/Dropdown';
-import { extractPricingString } from '../lib/helper';
+import { extractPricingString, getColor, hexToLowOpacityColor } from '../lib/helper';
 import { FeaturesListWrapper, FeatureTitle, PlanCard, PlanInfoVisitorsBlock, PlanInfoWrapper, PlanName, PlanPrice, PrimaryButton } from './styles/Elements.styles';
 
 // eslint-disable-next-line react/prop-types
 const PricingPlanCard = ({ planInfo }) => {
     const { plan, features } = planInfo ?? {}
+
+
+
     return (
-        <PlanCard>
+        <PlanCard borderColor={getColor(plan?.name)}>
             <PlanInfoWrapper>
                 <div className="plan-info">
                     <PlanName>{plan?.name}</PlanName>
                     <PlanPrice>{plan?.price}</PlanPrice>
                 </div>
                 {plan?.name !== "Growth" ?
-                    <PlanInfoVisitorsBlock>
+                    <PlanInfoVisitorsBlock color={getColor(plan?.name)} bgColor={hexToLowOpacityColor(getColor(plan?.name))}>
                         <span>{extractPricingString(plan?.title)}</span>
                         <Tooltip
                             tooltipContent={plan?.text}
@@ -53,7 +56,7 @@ const PricingPlanCard = ({ planInfo }) => {
                     ))
                 }
             </FeaturesListWrapper>
-            <PrimaryButton color='' >Select Plan</PrimaryButton>
+            <PrimaryButton color={getColor()} >Select Plan</PrimaryButton>
         </PlanCard>
     )
 

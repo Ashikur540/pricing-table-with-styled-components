@@ -2,9 +2,6 @@
 import Styled, { styled } from 'styled-components'
 
 
-
-
-
 export const PlanCard = Styled.div`
   display: flex;
   flex-direction: column;
@@ -19,7 +16,7 @@ export const PlanCard = Styled.div`
   background: #fff;
   border: 1px solid #eaeff2;
   border-radius: 8px;
-  border-top: 8px solid tomato;
+  border-top: 8px solid ${({borderColor})=> borderColor};
   padding: 24px 20px;
   position: relative;
   transition: all 0.25s;
@@ -83,9 +80,9 @@ export const PlanInfoVisitorsBlock = styled.div`
   -moz-column-gap: 5px;
   column-gap: 5px;
   display: inline-flex;
-  background: #f7f7f7;
+  background: ${({bgColor})=> bgColor};
   border-radius: 32px;
-  color: hotpink;
+  color: ${({color})=> color};
   font-size: 12.5px;
   padding: 5px 15px;
 `
@@ -141,7 +138,11 @@ export const PricingGrid= styled.div`
 export const TabContainer = styled.div`
   display: flex;
   align-items: center;
+  justify-content:center;
   gap: 16px;
+  margin-top:2.5rem;
+  margin-bottom:1.5rem;
+  flex-wrap:wrap;
 `;
 
 export const TabOption = styled.div`
@@ -172,3 +173,13 @@ export const SaveTag = styled.div`
   gap: 4px;
   font-size: 1rem;
 `;
+
+
+// switch (key) {
+//   case value:
+    
+//     break;
+
+//   default:
+//     break;
+// }
