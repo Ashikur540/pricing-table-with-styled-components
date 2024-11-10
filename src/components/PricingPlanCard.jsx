@@ -3,7 +3,7 @@ import { Tooltip } from './ui/Tooltip';
 import { TooltipTarget } from './styles/ui-element-styles/tooltip.styles';
 import IconInfo from './icons/Iconinfo';
 import Dropdown from './ui/Dropdown';
-import { extractPricingString, getColor, hexToLowOpacityColor } from '../lib/helper';
+import { extractPricingString, getColor, hexToContrastColor,  } from '../lib/helper';
 import { FeaturesListWrapper, FeatureTitle, PlanCard, PlanInfoVisitorsBlock, PlanInfoWrapper, PlanName, PlanPrice, PrimaryButton } from './styles/Elements.styles';
 
 // eslint-disable-next-line react/prop-types
@@ -20,7 +20,7 @@ const PricingPlanCard = ({ planInfo }) => {
                     <PlanPrice>{plan?.price}</PlanPrice>
                 </div>
                 {plan?.name !== "Growth" ?
-                    <PlanInfoVisitorsBlock color={getColor(plan?.name)} bgColor={hexToLowOpacityColor(getColor(plan?.name))}>
+                    <PlanInfoVisitorsBlock color={getColor(plan?.name)} bgColor={hexToContrastColor(getColor(plan?.name), "low")}>
                         <span>{extractPricingString(plan?.title)}</span>
                         <Tooltip
                             tooltipContent={plan?.text}
@@ -56,7 +56,7 @@ const PricingPlanCard = ({ planInfo }) => {
                     ))
                 }
             </FeaturesListWrapper>
-            <PrimaryButton color={getColor()} >Select Plan</PrimaryButton>
+            <PrimaryButton color={getColor(plan?.name)} hoverColor={hexToContrastColor(getColor(plan?.name), "high")}>Select Plan</PrimaryButton>
         </PlanCard>
     )
 

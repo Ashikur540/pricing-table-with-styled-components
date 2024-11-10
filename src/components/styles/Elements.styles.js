@@ -58,7 +58,7 @@ export const PrimaryButton= styled.button`
   font-size: 1rem;
   border: none;
   &:hover {
-  background-color: #2d0dff;
+  background-color: ${({ hoverColor }) => hoverColor ? hoverColor : "#a67bc3"};
 }
 `
 
