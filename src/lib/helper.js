@@ -29,7 +29,7 @@ export function extractPricingString(pricingString) {
 // }
 
 export function hexToContrastColor(hex, contrast="high") {
-    if(!contrast) throw new Error('Please provide a contrast type: high or low');
+    if(!contrast || !hex) throw new Error('Please provide required parameters');
   // Remove the hash at the start if it's there
   hex = hex.replace(/^#/, '');
 
@@ -51,10 +51,7 @@ export function hexToContrastColor(hex, contrast="high") {
   return contrast === "high" ? `rgba(${r-40}, ${g-40}, ${b-40})` : `rgba(${r}, ${g}, ${b}, 0.1)`;
 }
 
-
-
 export  function getColor(planName){
-  console.log("✨ ~ file: helper.js:35 ~ getColor ~ planName:", planName)
   switch (planName) {
       case "Free":
           return "#4CB3FD"

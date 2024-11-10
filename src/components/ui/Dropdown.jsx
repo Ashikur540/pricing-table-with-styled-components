@@ -10,7 +10,7 @@ import { dropdownOptions, setVisitorsForGrowth } from "../../features/pricing/pr
 const Dropdown = () => {
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
-  const selectedOption = useSelector(state => state.pricing.selectedGrowthVisitors);
+  const selectedOption = useSelector(state => state.pricing.selectedVisitors);
 
   const toggleDropdown = () => setIsOpen(!isOpen);
 

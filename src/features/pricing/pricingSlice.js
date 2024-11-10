@@ -19,7 +19,7 @@ const initialState = {
     features: pricingData.features,
     plansInfo: pricingData.plansInfo,
     selectedBilling: 'Billed monthly',
-    selectedGrowthVisitors: dropdownOptions[0]
+    selectedVisitors: dropdownOptions[0]
 }
 
 export const pricingSlice = createSlice({
@@ -31,7 +31,7 @@ export const pricingSlice = createSlice({
             state.selectedBilling = action.payload;
         },
         setVisitorsForGrowth: (state, action) => {
-            state.selectedGrowthVisitors = action.payload;
+            state.selectedVisitors = action.payload;
         },
     },
 })
