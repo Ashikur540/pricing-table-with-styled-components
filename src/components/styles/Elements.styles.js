@@ -38,6 +38,7 @@ export const FeatureTitle = styled.p`
  font-size: 16px;
  font-weight: 500;
  padding: 8px 0;
+
 `
 
 
@@ -77,7 +78,7 @@ export const FeaturesListWrapper = styled.div`
 
 export const PlanInfoVisitorsBlock = styled.div`
   align-items: center;
-  -moz-column-gap: 5px;
+  font-weight: 400;
   column-gap: 5px;
   display: inline-flex;
   background: ${({bgColor})=> bgColor};
@@ -89,11 +90,11 @@ export const PlanInfoVisitorsBlock = styled.div`
 
 export const PlanName = styled.h4`
   font-size: 1.2rem;
-  font-weight: 500;
-  color: #1a1a1a;
+  font-weight: 400;
+  color: #49687E;
 `
 export const PlanPrice = styled.h2`
-  color: #1a1a1a;
+  color: ${({color})=>color};
   font-size: 32px;
   font-weight: 600;
   margin-bottom: 4px;
@@ -175,11 +176,27 @@ export const SaveTag = styled.div`
 `;
 
 
-// switch (key) {
-//   case value:
-    
-//     break;
-
-//   default:
-//     break;
-// }
+export const Badge = Styled.div`
+  background-color: #68CB9B!important;
+  color: #fff;
+  background: #68CB9B !important;
+  border-radius: 3px;
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  padding: 6.5px 8px;
+  position: absolute;
+  right: 6px;
+  top: 6px;
+`
+export const LineTroughText = styled.span`
+  color: #ff424d;
+  font-size: 12px;
+  line-height: 1;
+  position: absolute;
+  text-decoration: line-through;
+  top: 8%;
+  left: 36%;
+  font-weight: 400;
+`

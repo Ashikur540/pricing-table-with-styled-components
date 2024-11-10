@@ -6,7 +6,6 @@ export const DropdownContainer = styled.div`
   position: relative;
   width: 100%;
   max-width: 300px;
-  margin: 1em 0;
 `;
 
 export const DropdownHeader = styled.div`
@@ -16,9 +15,9 @@ export const DropdownHeader = styled.div`
   padding: 6px 15px;
   font-size: 12.5px;
   font-weight: 500;
-  color: #a67bc3;
+  color:${({color}) => color ? color : "#a67bc3"}; ;
   background-color: #f7f7f7;
-  border: 1px solid #a67bc3;
+  border: 1px solid ${({ color }) => color ? color : "#a67bc3"};
   border-radius: 6px;
   cursor: pointer;
   gap: 4px;
@@ -49,18 +48,18 @@ export const DropdownList = styled.ul`
 export const ListItem = styled.li`
   padding: 8px 16px;
   font-size: .8rem;
-  background:${({selected})=> selected ? "rgb(183, 139, 235,0.1)" : "transparent"};
-  color:${({selected})=> selected ? "#a67bc3" : "rgb(73, 104, 126)"};
+  background:${({ selected , hoverColor}) => selected ? hoverColor : "transparent"};
+  color:${({ color }) => color ? color : "rgb(73, 104, 126)"};
   cursor: pointer;
   border-bottom: 1px solid #eaeff2;
   &:hover {
-    background-color: rgb(183, 139, 235,0.1);
+    background-color: ${({ hoverColor }) => hoverColor};
   }
 `;
 
 export const Arrow = styled.span`
   font-size: 1.2rem;
-  color: #a67bc3;
+  color: ${({ color }) => color ? color : "#a67bc3"};
   transform: ${({ isOpen }) => (isOpen ? "rotate(180deg)" : "rotate(0deg)")};
   transition: transform 0.3s ease;
 `;
