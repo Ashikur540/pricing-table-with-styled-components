@@ -199,3 +199,10 @@ button:focus-visible {
     grid-template-columns: 1fr; /* 1 column for mobile */
   }
 }
+
+.amount-postfix {
+  color: #83a1b7;
+  margin-left: 4px;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+}

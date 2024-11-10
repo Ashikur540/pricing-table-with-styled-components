@@ -1,42 +1,58 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 
 import IconDownOpenMini from "../icons/IconDownOpenMini";
-import { Arrow, DropdownContainer, DropdownHeader, DropdownList, DropdownListContainer, ListItem } from "../styles/ui-element-styles/dropdown.styles";
-import { dropdownOptions, setVisitorsForGrowth } from "../../features/pricing/pricingSlice";
+import {
+  Arrow,
+  DropdownContainer,
+  DropdownHeader,
+  DropdownList,
+  DropdownListContainer,
+  ListItem
+} from "../styles/ui-element-styles/dropdown.styles";
+import { setPlanVariant } from "../../features/pricing/pricingSlice";
+import { getColor, hexToContrastColor } from "../../lib/helper";
+import { useClickOutside } from "../../hooks/useClickOutside";
 
-
-
-const Dropdown = () => {
+// eslint-disable-next-line react/prop-types
+const Dropdown = ({ planName, variants }) => {
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
-  const selectedOption = useSelector(state => state.pricing.selectedVisitors);
+  const selectedVariant = useSelector(
+    state => state.pricing.selectedPlanVariants[planName]
+  );
+  const ref= useRef(null);
+  // close dropdown when clicked outside
+  useClickOutside(ref, () => setIsOpen(false));
 
   const toggleDropdown = () => setIsOpen(!isOpen);
 
-  const handleOptionClick = (option) => {
-    dispatch(setVisitorsForGrowth(option));
+  const handleOptionClick = (visitorCount) => {
+    dispatch(setPlanVariant({ planName, visitorCount }));
     setIsOpen(false);
   };
 
   return (
-    <DropdownContainer>
-      <DropdownHeader onClick={toggleDropdown}>
-        {selectedOption.slice(0, 20)}...
-        <Arrow isOpen={isOpen}>
+    <DropdownContainer ref={ref}>
+      <DropdownHeader onClick={toggleDropdown} color={getColor(planName)}>
+        {selectedVariant ?? variants[0].visitorCount} visitors/month
+        <Arrow isOpen={isOpen} color={getColor(planName)}>
           <IconDownOpenMini />
         </Arrow>
       </DropdownHeader>
       {isOpen && (
         <DropdownListContainer>
           <DropdownList>
-            {dropdownOptions.map((option, index) => (
+            {variants?.map(({ visitorCount }, index) => (
               <ListItem
+                color={getColor(planName)}
                 key={index}
-                onClick={() => handleOptionClick(option)}
-                selected={selectedOption === option}
+                onClick={() => handleOptionClick(visitorCount)}
+                hoverColor={hexToContrastColor(getColor(planName), 0.1)}
+                // initially pre select the first plan variant
+                selected={selectedVariant ? selectedVariant === visitorCount : variants[0].visitorCount === visitorCount}
               >
-                {option}
+                Up to {visitorCount} visitors/month
               </ListItem>
             ))}
           </DropdownList>
@@ -45,5 +61,6 @@ const Dropdown = () => {
     </DropdownContainer>
   );
 };
+
 
 export default Dropdown;

@@ -3,24 +3,48 @@ import { Tooltip } from './ui/Tooltip';
 import { TooltipTarget } from './styles/ui-element-styles/tooltip.styles';
 import IconInfo from './icons/Iconinfo';
 import Dropdown from './ui/Dropdown';
-import { extractPricingString, getColor, hexToContrastColor,  } from '../lib/helper';
-import { FeaturesListWrapper, FeatureTitle, PlanCard, PlanInfoVisitorsBlock, PlanInfoWrapper, PlanName, PlanPrice, PrimaryButton } from './styles/Elements.styles';
+import { extractPricingString, getColor, hexToContrastColor, } from '../lib/helper';
+import { Badge, FeaturesListWrapper, FeatureTitle, LineTroughText, PlanCard, PlanInfoVisitorsBlock, PlanInfoWrapper, PlanName, PlanPrice, PrimaryButton } from './styles/Elements.styles';
+import { useSelector } from 'react-redux';
 
 // eslint-disable-next-line react/prop-types
 const PricingPlanCard = ({ planInfo }) => {
-    const { plan, features } = planInfo ?? {}
-
-
+    const { plan, features } = planInfo ?? {};
+    const billingType = useSelector(state => state.pricing.selectedBilling);
 
     return (
         <PlanCard borderColor={getColor(plan?.name)}>
+            {plan.name === "Pro" && <Badge color={getColor(plan?.name)}>Popular</Badge>}
             <PlanInfoWrapper>
                 <div className="plan-info">
                     <PlanName>{plan?.name}</PlanName>
-                    <PlanPrice>{plan?.price}</PlanPrice>
+                    <PlanPrice color={getColor(plan.name)}>
+                        {plan?.price}
+                        <span className='amount-postfix'>{plan?.pricePostfix}</span>
+                        {billingType !== "Billed monthly" && plan.name !== "Free" && <LineTroughText>{plan.salePrice ?? 0}/Month</LineTroughText>}
+                    </PlanPrice>
                 </div>
-                {plan?.name !== "Growth" ?
-                    <PlanInfoVisitorsBlock color={getColor(plan?.name)} bgColor={hexToContrastColor(getColor(plan?.name), "low")}>
+
+                {plan?.hasVariants ? (
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <Dropdown
+                            planName={plan.name}
+                            variants={plan.variants}
+                        />
+                        <Tooltip
+                            tooltipContent={plan?.text}
+                            position="top"
+                            background="fff">
+                            <TooltipTarget>
+                                <IconInfo style={{ color: getColor(plan?.name) }} />
+                            </TooltipTarget>
+                        </Tooltip>
+                    </div>
+                ) : (
+                    <PlanInfoVisitorsBlock
+                        color={getColor(plan?.name)}
+                        bgColor={hexToContrastColor(getColor(plan?.name), "low")}
+                    >
                         <span>{extractPricingString(plan?.title)}</span>
                         <Tooltip
                             tooltipContent={plan?.text}
@@ -29,18 +53,7 @@ const PricingPlanCard = ({ planInfo }) => {
                             <TooltipTarget><IconInfo /></TooltipTarget>
                         </Tooltip>
                     </PlanInfoVisitorsBlock>
-                    : (
-                        <div style={{ display: 'flex', justifyContent: 'start', alignItems: 'center', gap: '8px' }}>
-                            <Dropdown />
-                            <Tooltip
-                                tooltipContent={plan?.text}
-                                position="top"
-                                background="fff">
-                                <TooltipTarget><IconInfo style={{ color: "#a67bc3" }} /></TooltipTarget>
-                            </Tooltip>
-                        </div>
-                    )
-                }
+                )}
             </PlanInfoWrapper>
             <FeaturesListWrapper>
                 <FeatureTitle>Free includes:</FeatureTitle>
