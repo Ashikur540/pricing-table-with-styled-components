@@ -135,3 +135,40 @@ export const PricingGrid= styled.div`
 
 
 `
+
+
+
+export const TabContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 16px;
+`;
+
+export const TabOption = styled.div`
+  font-weight: ${(props) => (props.active ? '600' : '400')};
+  color: ${(props) => (props.active ? '#a259ff' : '#333')};
+  cursor: pointer;
+  position: relative;
+
+  &:after {
+    content: ${(props) => (props.active ? "''" : '')};
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    height: 2px;
+    width: 100%;
+    background-color: #a259ff;
+  }
+`;
+
+export const SaveTag = styled.div`
+  background-color: #f3ebff;
+  color: #333;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 1rem;
+`;

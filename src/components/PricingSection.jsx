@@ -4,6 +4,7 @@ import PricingPlanCard from './PricingPlanCard';
 import { options } from './ui/Dropdown';
 import { extractPricingString } from '../lib/helper';
 import { PricingGrid } from './styles/Elements.styles';
+import BillingTab from './BillingTab';
 
 const PricingSection = () => {
     const [planData, setPlanData] = useState([]);
@@ -47,6 +48,7 @@ const PricingSection = () => {
 
     return (
         <div className="container">
+            <BillingTab/>
             {/* 4 column card grid */}
             <PricingGrid>
                 {
