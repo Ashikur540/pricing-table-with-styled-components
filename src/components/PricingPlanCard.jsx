@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux';
 
 import { Tooltip } from './ui/Tooltip';
 import { TooltipTarget } from './styles/ui-element-styles/tooltip.styles';
@@ -5,7 +6,6 @@ import IconInfo from './icons/Iconinfo';
 import Dropdown from './ui/Dropdown';
 import { extractPricingString, getColor, hexToContrastColor, } from '../lib/helper';
 import { Badge, FeaturesListWrapper, FeatureTitle, LineTroughText, PlanCard, PlanInfoVisitorsBlock, PlanInfoWrapper, PlanName, PlanPrice, PrimaryButton } from './styles/Elements.styles';
-import { useSelector } from 'react-redux';
 
 // eslint-disable-next-line react/prop-types
 const PricingPlanCard = ({ planInfo }) => {
@@ -21,7 +21,8 @@ const PricingPlanCard = ({ planInfo }) => {
                     <PlanPrice color={getColor(plan.name)}>
                         {plan?.price}
                         <span className='amount-postfix'>{plan?.pricePostfix}</span>
-                        {billingType !== "Billed monthly" && plan.name !== "Free" && <LineTroughText>{plan.salePrice ?? 0}/Month</LineTroughText>}
+                        {billingType !== "Billed monthly" && plan.name !== "Free" &&
+                            <LineTroughText>{plan.salePrice ?? 0}/Month</LineTroughText>}
                     </PlanPrice>
                 </div>
 

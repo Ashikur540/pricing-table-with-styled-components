@@ -21,7 +21,7 @@ export const PlanCard = Styled.div`
   position: relative;
   transition: all 0.25s;
   margin: 0 auto;
-  width: 90%;
+  width: 80%;
 `
 
 export const PlanInfoWrapper = Styled.div`
@@ -105,7 +105,7 @@ export const PricingGrid= styled.div`
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 1em;
-    padding: 1em;
+    
     justify-content: center;
     max-width: 1260px;
     width: 96%;

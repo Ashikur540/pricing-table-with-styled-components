@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useRef, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -14,7 +15,7 @@ import { setPlanVariant } from "../../features/pricing/pricingSlice";
 import { getColor, hexToContrastColor } from "../../lib/helper";
 import { useClickOutside } from "../../hooks/useClickOutside";
 
-// eslint-disable-next-line react/prop-types
+ 
 const Dropdown = ({ planName, variants }) => {
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
