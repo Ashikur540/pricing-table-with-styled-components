@@ -197,6 +197,6 @@ export const LineTroughText = styled.span`
   position: absolute;
   text-decoration: line-through;
   top: 8%;
-  left: 36%;
+  left: 40%;
   font-weight: 400;
 `
