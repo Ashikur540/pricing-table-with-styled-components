@@ -79,6 +79,17 @@ export const TooltipBox = styled.span`
   box-shadow: 0 0 16px 0 rgba(73, 104, 126, .2);
   z-index: 10 !important;
   animation: ${fadeIn} 0.3s linear;
+  /* for image if tooltip have  */
+  img {
+    max-width: 220px; // Slightly less than tooltip max-width
+    height: auto;
+    border-radius: 4px;
+    margin-top: 8px;
+    display: block;
+  }
+  p {
+    margin-bottom: 4px;
+  }
   
   &:after {
     content: "";

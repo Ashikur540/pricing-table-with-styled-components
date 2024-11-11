@@ -141,7 +141,7 @@ export const TabContainer = styled.div`
   align-items: center;
   justify-content:center;
   gap: 16px;
-  margin-top:2.5rem;
+  margin-top:4.5rem;
   margin-bottom:1.5rem;
   flex-wrap:wrap;
 `;
