@@ -5,7 +5,7 @@ import { TooltipTarget } from './styles/ui-element-styles/tooltip.styles';
 import IconInfo from './icons/Iconinfo';
 import Dropdown from './ui/Dropdown';
 import { extractPricingString, getColor, hexToContrastColor, } from '../lib/helper';
-import { Badge, FeaturesListWrapper, FeatureTitle, LineTroughText, PlanCard, PlanInfoVisitorsBlock, PlanInfoWrapper, PlanName, PlanPrice, PrimaryButton } from './styles/Elements.styles';
+import { Badge, DropDownWithIconWrapper, FeaturesListWrapper, FeatureTitle, LineTroughText, PlanCard, PlanInfoVisitorsBlock, PlanInfoWrapper, PlanName, PlanPrice, PrimaryButton } from './styles/Elements.styles';
 
 // eslint-disable-next-line react/prop-types
 const PricingPlanCard = ({ planInfo }) => {
@@ -16,7 +16,7 @@ const PricingPlanCard = ({ planInfo }) => {
         <PlanCard borderColor={getColor(plan?.name)}>
             {plan.name === "Pro" && <Badge color={getColor(plan?.name)}>Popular</Badge>}
             <PlanInfoWrapper>
-                <div className="plan-info">
+                <>
                     <PlanName>{plan?.name}</PlanName>
                     <PlanPrice color={getColor(plan.name)}>
                         {plan?.price}
@@ -24,10 +24,10 @@ const PricingPlanCard = ({ planInfo }) => {
                         {billingType !== "Billed monthly" && plan.name !== "Free" &&
                             <LineTroughText>{plan.salePrice ?? 0}/Month</LineTroughText>}
                     </PlanPrice>
-                </div>
+                </>
 
                 {plan?.hasVariants ? (
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <DropDownWithIconWrapper>
                         <Dropdown
                             planName={plan.name}
                             variants={plan.variants}
@@ -40,7 +40,7 @@ const PricingPlanCard = ({ planInfo }) => {
                                 <IconInfo style={{ color: getColor(plan?.name) }} />
                             </TooltipTarget>
                         </Tooltip>
-                    </div>
+                    </DropDownWithIconWrapper>
                 ) : (
                     <PlanInfoVisitorsBlock
                         color={getColor(plan?.name)}

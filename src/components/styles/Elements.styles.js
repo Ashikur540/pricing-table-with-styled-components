@@ -16,7 +16,7 @@ export const PlanCard = Styled.div`
   background: #fff;
   border: 1px solid #eaeff2;
   border-radius: 8px;
-  border-top: 8px solid ${({borderColor})=> borderColor};
+  border-top: 8px solid ${({ borderColor }) => borderColor};
   padding: 24px 20px;
   position: relative;
   transition: all 0.25s;
@@ -42,7 +42,7 @@ export const FeatureTitle = styled.p`
 `
 
 
-export const PrimaryButton= styled.button`
+export const PrimaryButton = styled.button`
   background-color: ${({ color }) => color ? color : "#a67bc3"};
   fill-opacity: 0.2;
   border-radius: 8px;
@@ -81,9 +81,9 @@ export const PlanInfoVisitorsBlock = styled.div`
   font-weight: 400;
   column-gap: 5px;
   display: inline-flex;
-  background: ${({bgColor})=> bgColor};
+  background: ${({ bgColor }) => bgColor};
   border-radius: 32px;
-  color: ${({color})=> color};
+  color: ${({ color }) => color};
   font-size: 12.5px;
   padding: 5px 15px;
 `
@@ -94,14 +94,14 @@ export const PlanName = styled.h4`
   color: #49687E;
 `
 export const PlanPrice = styled.h2`
-  color: ${({color})=>color};
+  color: ${({ color }) => color};
   font-size: 32px;
   font-weight: 600;
   margin-bottom: 4px;
 `
 
 
-export const PricingGrid= styled.div`
+export const PricingGrid = styled.div`
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 1em;
@@ -199,4 +199,11 @@ export const LineTroughText = styled.span`
   top: 8%;
   left: 40%;
   font-weight: 400;
+`
+
+
+export const DropDownWithIconWrapper = styled.div`
+ display: flex;
+ align-items: center;
+ gap: 8px;
 `
